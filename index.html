@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cooking Game</title>
+</head>
+<body>
+  <h1>Cooking Game</h1>
+  <p>Ask the AI cooking assistant a question about cooking and see if it can answer correctly!</p>
+  
+  <div id="question-form">
+    <form id="form">
+      <label for="question">Enter your question:</label><br>
+      <input type="text" id="question" name="question"><br>
+      <input type="submit" value="Submit">
+    </form> 
+  </div>
+  
+  <div id="response"></div>
+  
+  <script>
+    // Set up event listener for form submission
+    document.getElementById('form').addEventListener('submit', function(e) {
+      e.preventDefault(); // prevent page refresh
+      
+      // Get the question from the form
+      var question = document.getElementById('question').value;
+      
+      // Use the Web Speech API to ask the question out loud
+      var synth = window.speechSynthesis;
+      var utterance = new SpeechSynthesisUtterance(question);
+      synth.speak(utterance);
+      
+      // Use AI to try to answer the question
+      // (in this example, we'll just use a simple switch statement)
+      var response;
+      switch (question.toLowerCase()) {
+        case "what is the best way to cook broccoli?":
+          response = "Steaming or roasting broccoli are both great cooking methods.";
+          break;
+        case "how do i make a basic pasta sauce?":
+          response = "To make a basic pasta sauce, heat some olive oil in a pan and add chopped garlic and diced onions. Cook until the onions are translucent, then add canned tomatoes and some dried herbs. Bring the sauce to a simmer and let it cook for about 15 minutes. Add salt and pepper to taste.";
+          break;
+        case "can i freeze cooked rice?":
+          response = "Yes, cooked rice can be frozen for up to 6 months. Just make sure to let it cool completely before transferring it to an airtight container or freezer bag.";
+          break;
+        default:
+          response = "I'm sorry, I don't know the answer to that question. Could you try asking something else?";
+      }
+      
+      // Display the response
+      document.getElementById('response').innerHTML = response;
+    });
+  </script>
+</body>
+</html>
